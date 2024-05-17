@@ -1,12 +1,12 @@
-var numberOfButtons = document.querySelectorAll(".drum").length;
 
-for (i = 0; i<numberOfButtons; i++) {
-    document.querySelectorAll(".drum")[i].addEventListener("click", function () {
 
-            var buttonInnerHTML = this.innerHTML;
-            
-            switch (buttonInnerHTML) {
-                case "w":
+document.addEventListener("keydown", function (event){
+    console.log(event);
+})
+
+function playSound(key) {
+    switch (key) {
+        case "w":
                     var tom1 = new Audio("./sounds/tom-1.mp3");
                     tom1.play();
                     break;
@@ -35,10 +35,23 @@ for (i = 0; i<numberOfButtons; i++) {
                     kick.play();
                     break;
                 default:
-                    console.log(buttonInnerHTML);
+                    console.log(key);
                     break;
-            }
+    }
+}
+// add event listener to all drum buttons
+var numberOfButtons = document.querySelectorAll(".drum").length;
+
+for (i = 0; i<numberOfButtons; i++) {
+    document.querySelectorAll(".drum")[i].addEventListener("click", function () {
+
+            var buttonInnerHTML = this.innerHTML;
+            playSound(buttonInnerHTML);
         }
     )
 }
 
+// ADD EVENT LISTENER FOR KEYPRESS
+document.addEventListener("keydown",function(e){
+    playSound(e.key);
+});
